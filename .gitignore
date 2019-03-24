@@ -1,0 +1,9 @@
+/vscode
+*.pdf
+*.o
+incl.defs
+main
+.*/
+*.txt
+*.csv
+*.tar.gz
