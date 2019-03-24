@@ -13,8 +13,8 @@ BIN=./bin
 
 CC=g++
 CCFLAGS=-std=c++11
-SOURCES=huffencode.cpp 
-OBJECTS=huffencode.o 
+SOURCES=huffencode.cpp huffemantree.cpp
+OBJECTS=huffencode.o huffemantree.o
 
 main: $(OBJECTS)
 	$(CC) $(CCFLAGS) $(OBJECTS) -o huffencode $(LIBS)
@@ -27,7 +27,7 @@ depend:
 	$(CC) -M $(SOURCES) > incl.defs
 
 run:
-	huffencode inputfile outputfile
+	./huffencode inputfile outputfile
 
 clean:
 	rm *.o
