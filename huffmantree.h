@@ -5,6 +5,7 @@ namespace KTMNYA001{
 
     class HuffmanNode{
 
+        public:
         /**
          * The left and right pointers
          */
@@ -12,12 +13,15 @@ namespace KTMNYA001{
         std::shared_ptr<KTMNYA001::HuffmanNode> right;
 
         char letter;
-        int frequency;
+        int freq;
 
         // Constructor
-        HuffmanNode();
+        HuffmanNode(char l, int f);
         // Deconstructor
         ~HuffmanNode();
+
+        // Operator overloading
+        bool operator < (const HuffmanNode& other);
 
     };
 
