@@ -1,4 +1,5 @@
 #ifndef HUFFMANNODE_H
+#define HUFFMANNODE_H
 #include <memory>
 
 namespace KTMNYA001{
@@ -23,6 +24,11 @@ namespace KTMNYA001{
         // Operator overloading
         bool operator < (const HuffmanNode& other);
 
+    };
+
+    class Compare{
+        public:
+        bool operator() (HuffmanNode& a, HuffmanNode& b);
     };
 
     class HuffmanTree{
