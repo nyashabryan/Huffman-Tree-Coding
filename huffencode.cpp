@@ -1,3 +1,6 @@
+/**
+ * Include statements
+ */
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -6,11 +9,15 @@
 
 #include "huffmantree.h"
 
-
+/**
+ * Using declarations
+ */
 using namespace std;
 using namespace KTMNYA001;
 
-// Function declarations
+/**
+ * Function declarations
+ */
 unordered_map<char, int> get_letter_frequency(string inputfile);
 bool compare(HuffmanNode& a, HuffmanNode& b);
 priority_queue<HuffmanNode, vector<HuffmanNode>, Compare> make_priority_queue(const unordered_map<char, int>& map);
@@ -84,12 +91,10 @@ unordered_map<char, int> get_letter_frequency(string inputfile){
 }
 
 
-
 /**
  * Builds the priority queue for the Huffman Nodes.
  */
 priority_queue<HuffmanNode, vector<HuffmanNode>, Compare> make_priority_queue(const unordered_map<char, int>& map){
-    Compare compare;
     priority_queue<HuffmanNode, vector<HuffmanNode>, Compare> my_queue;
     for(const auto& n: map){
         HuffmanNode node(n.first, n.second);
