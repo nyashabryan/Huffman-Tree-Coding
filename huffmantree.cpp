@@ -10,9 +10,9 @@
 /**
  * Huffman Tree class destructor
  */
-// KTMNYA001::HuffmanTree::~HuffmanTree(){
-//     //root = nullptr;
-// }
+KTMNYA001::HuffmanTree::~HuffmanTree(){
+    root = nullptr;
+}
 
 bool KTMNYA001::HuffmanTree::build_tree(std::priority_queue<KTMNYA001::HuffmanNode, std::vector<KTMNYA001::HuffmanNode>, KTMNYA001::Compare> queue){
     return true;

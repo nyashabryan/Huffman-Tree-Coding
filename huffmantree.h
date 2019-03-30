@@ -19,7 +19,7 @@ namespace KTMNYA001{
         // Constructor
         HuffmanNode(char l, int f);
         // Deconstructor
-        // ~HuffmanNode();
+        ~HuffmanNode();
 
         // Operator overloading
         bool operator < (const HuffmanNode& other);
