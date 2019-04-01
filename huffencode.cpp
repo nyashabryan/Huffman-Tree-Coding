@@ -19,7 +19,7 @@ using namespace KTMNYA001;
  * Function declarations
  */
 unordered_map<char, int> get_letter_frequency(string inputfile);
-bool compare(HuffmanNode& a, HuffmanNode& b);
+// bool compare(HuffmanNode& a, HuffmanNode& b);
 priority_queue<HuffmanNode, vector<HuffmanNode>, Compare> make_priority_queue(const unordered_map<char, int>& map);
 
 /**
@@ -50,6 +50,13 @@ int main(int argc, char ** argv){
 
     priority_queue<HuffmanNode, vector<HuffmanNode>, Compare> my_queue = make_priority_queue(map);
 
+    HuffmanTree tree;
+    tree.build_tree(my_queue);
+
+    while(my_queue.size() > 0){
+        cout << my_queue.top().freq << endl;
+        my_queue.pop();
+    }
     return 0;
 }
 

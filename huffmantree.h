@@ -18,6 +18,9 @@ namespace KTMNYA001{
 
         // Constructor
         HuffmanNode(char l, int f);
+        // Frequency only constructor
+        HuffmanNode(int f);
+
         // Deconstructor
         ~HuffmanNode();
 
@@ -32,7 +35,8 @@ namespace KTMNYA001{
     };
 
     class HuffmanTree{
-
+        
+        public:
         std::shared_ptr<HuffmanNode> root;
 
         // Constructor
@@ -41,6 +45,8 @@ namespace KTMNYA001{
         ~HuffmanTree();
 
         bool build_tree(std::priority_queue<HuffmanNode, std::vector<HuffmanNode>, Compare> queue);
+
+        void build_code_table();
 
     };
 
