@@ -25,6 +25,12 @@ namespace KTMNYA001{
 
         void build_code_table(std::string code, std::shared_ptr<HuffmanNode> current);
 
+        void output(std::string input_file, std::string output_file);
+
+        void write_output(std::string input_file, std::string output_file);
+
+        void write_hdr(std::string header_file);
+
     };
 
 }

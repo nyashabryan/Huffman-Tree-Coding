@@ -1,6 +1,7 @@
 #include <queue>
 #include <vector>
 #include <iostream>
+#include <fstream>
 #include <memory>
 #include <string>
 
@@ -60,3 +61,47 @@ void KTMNYA001::HuffmanTree::build_code_table(std::string code, std::shared_ptr<
     }
 }
 
+/**
+ * Initiates the output of the encoding process.
+ */
+void KTMNYA001::HuffmanTree::output(string input_file, string output_file){
+    write_hdr(output_file + ".hdr");
+    write_output(input_file, output_file);
+}
+
+/**
+ * Write the output of the encoding of the original characters into 
+ * an output file.
+ */
+void KTMNYA001::HuffmanTree::write_output(string input_file, string output_file){
+    cout << "Writing output" << endl;
+    string output = "";
+    char buffer[1];
+    ifstream ifs;
+    cout << input_file << endl;
+    ifs.open(input_file);
+    while(!ifs.eof()){
+        ifs.read(buffer, sizeof(buffer[0]));
+        output+=code_table[buffer[0]];
+    }
+    ifs.close();
+
+    cout << "Done" << endl;
+    ofstream ofs;
+    ofs.open(output_file);
+    ofs << output;
+    ofs.close();
+}
+
+/**
+ * Output the encoding details to a header file. Includes the 
+ * encoding table.
+ */
+void KTMNYA001::HuffmanTree::write_hdr(string header_file){
+    ofstream ofs;
+    ofs.open(header_file);
+
+    for(const auto &n: code_table){
+        ofs << n.first << ": " << n.second << endl;
+    }
+}

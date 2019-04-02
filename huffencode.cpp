@@ -66,10 +66,8 @@ int main(int argc, char ** argv){
     // Build the code table
     tree.build_code_table();
 
-    // test then code table 
-    for(const auto &n: tree.code_table){
-        cout << n.first << " " << n.second << endl;
-    }
+    // Output the results of the encoding
+    tree.output(string(argv[1]), string(argv[2]));
     return 0;
 }
 
