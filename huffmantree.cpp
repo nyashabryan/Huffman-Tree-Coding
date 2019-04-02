@@ -5,6 +5,7 @@
 #include <string>
 
 #include "huffmantree.h"
+#include "huffmannode.h"
 
 // using directives
 

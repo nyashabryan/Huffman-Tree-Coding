@@ -13,8 +13,8 @@ BIN=./bin
 
 CC=g++
 CCFLAGS=-std=c++11
-SOURCES=huffmantree.cpp huffencode.cpp
-OBJECTS=huffmantree.o huffencode.o
+SOURCES=huffmannode.cpp huffmantree.cpp huffencode.cpp
+OBJECTS=huffmannode.o huffmantree.o huffencode.o
 
 main: $(OBJECTS)
 	$(CC) $(CCFLAGS) $(OBJECTS) -o huffencode $(LIBS)

@@ -1,40 +1,12 @@
-#ifndef HUFFMANNODE_H
-#define HUFFMANNODE_H
+#ifndef HUFFMANTREE_H
+#define HUFFMANTREE_H
 #include <memory>
 #include <string>
 #include <unordered_map>
 
+#include "huffmannode.h"
+
 namespace KTMNYA001{
-
-    class HuffmanNode{
-
-        public:
-        /**
-         * The left and right pointers
-         */
-        std::shared_ptr<KTMNYA001::HuffmanNode> left;
-        std::shared_ptr<KTMNYA001::HuffmanNode> right;
-
-        char letter;
-        int freq;
-
-        // Constructor
-        HuffmanNode(char l, int f);
-        // Frequency only constructor
-        HuffmanNode(int f);
-
-        // Deconstructor
-        ~HuffmanNode();
-
-        // Operator overloading
-        bool operator < (const HuffmanNode& other);
-
-    };
-
-    class Compare{
-        public:
-        bool operator() (HuffmanNode& a, HuffmanNode& b);
-    };
 
     class HuffmanTree{
         
