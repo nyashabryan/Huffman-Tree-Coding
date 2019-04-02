@@ -8,7 +8,7 @@
 #include "huffmannode.h"
 
 // using directives
-
+using namespace std;
 /**
  * Huffman Tree Class Methods
  */
@@ -21,23 +21,23 @@ KTMNYA001::HuffmanTree::~HuffmanTree(){
 }
 
 bool KTMNYA001::HuffmanTree::build_tree(std::priority_queue<KTMNYA001::HuffmanNode, std::vector<KTMNYA001::HuffmanNode>, KTMNYA001::Compare> my_queue){
-
+    cout << "Beginning to build tree " << "queue size: " << my_queue.size() <<endl;
     while(my_queue.size() > 1){
-        std::shared_ptr<HuffmanNode> left(new KTMNYA001::HuffmanNode(my_queue.top()));
-        std::cout << "Count" <<  left->freq << std::endl;
+        
+        shared_ptr<HuffmanNode> left(new HuffmanNode(my_queue.top()));
         my_queue.pop();
-        std::shared_ptr<HuffmanNode> right(new KTMNYA001::HuffmanNode(my_queue.top()));
-        my_queue.pop();
-        std::cout << "Count" << right->freq << std::endl;
-        HuffmanNode node(left->freq + right->freq);
-        node.left = left;
-        node.right = right;
 
-        my_queue.push(node);
+        shared_ptr<HuffmanNode> right(new HuffmanNode(my_queue.top()));
+        my_queue.pop();
+
+        shared_ptr<HuffmanNode> node(new HuffmanNode(left->freq + right->freq));
+        node->left = left;
+        node->right = right;
+
+        my_queue.push(*node);
     }
-    root = std::make_shared<KTMNYA001::HuffmanNode>(KTMNYA001::HuffmanNode(my_queue.top()));
-    std::cout << "Done loading priority queue" << std::endl;
-    std::cout << root->left->freq << std::endl;
+    shared_ptr<HuffmanNode> last(new HuffmanNode(my_queue.top()));
+    root = last;
     return true;
 }
 
@@ -47,48 +47,16 @@ void KTMNYA001::HuffmanTree::build_code_table(){
 }
 
 void KTMNYA001::HuffmanTree::build_code_table(std::string code, std::shared_ptr<KTMNYA001::HuffmanNode> current){
-    if(!(root->letter == '\0')){
-        std::cout << root-> letter << " " << code << std::endl;
-        code_table[root->letter] = code;
+    if(!(current->letter == '\0')){
+        code_table[current->letter] = code;
     }
 
-    if(!(root->left == nullptr)){
-        build_code_table(code + "0", root->left);
+    if(!(current->left == nullptr)){
+        build_code_table(code + "0", current->left);
     }
 
-    if(!(root->right == nullptr)){
-        build_code_table(code + "1", root->right);
+    if(!(current->right == nullptr)){
+        build_code_table(code + "1", current->right);
     }
-}
-
-/**
- * The Huffman Node Methods
- */
-
-/**
- * The Huffman Node constructors
- */
-KTMNYA001::HuffmanNode::HuffmanNode(char l, int f): letter(l), freq(f){}
-
-KTMNYA001::HuffmanNode::HuffmanNode(int f): freq(f){
-    letter = '\0';
-}
-
-KTMNYA001::HuffmanNode::~HuffmanNode(){}
-/**
- * The < operator overloading. Compares two nodes based on their frequencies.
- */
-bool KTMNYA001::HuffmanNode::operator < (const KTMNYA001::HuffmanNode& other){
-    if (freq < other.freq) return true;
-    return false;
-}
-
-/**
- * The predicate method to compare two HuffmanNodes. Uses the
- * < operator on the HuffmanNodes.
- */
-bool KTMNYA001::Compare::operator()(KTMNYA001::HuffmanNode& a, KTMNYA001::HuffmanNode& b){
-    if (a < b) return true;
-    return false;
 }
 

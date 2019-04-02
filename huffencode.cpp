@@ -50,6 +50,14 @@ int main(int argc, char ** argv){
 
     priority_queue<HuffmanNode, vector<HuffmanNode>, Compare> my_queue = make_priority_queue(map);
 
+    // Test my queue
+    // cout << "Testing priority queue" << endl;
+    // while(my_queue.size() > 1){
+    //     cout << my_queue.top().freq << endl;
+    //     my_queue.pop();
+    // }
+    // cout << "Done testing priority queue" << endl << endl;
+
     HuffmanTree tree;
 
     // Build the Huffman tree.
@@ -58,6 +66,10 @@ int main(int argc, char ** argv){
     // Build the code table
     tree.build_code_table();
 
+    // test then code table 
+    for(const auto &n: tree.code_table){
+        cout << n.first << " " << n.second << endl;
+    }
     return 0;
 }
 

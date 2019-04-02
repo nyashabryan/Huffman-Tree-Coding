@@ -16,10 +16,16 @@ namespace KTMNYA001{
         char letter;
         int freq;
 
+        //Default Constructor
+        HuffmanNode();
+
         // Constructor
         HuffmanNode(char l, int f);
         // Frequency only constructor
         HuffmanNode(int f);
+
+        // Copy constructor
+        HuffmanNode(const HuffmanNode& oldHuffmanNode);
 
         // Deconstructor
         ~HuffmanNode();
