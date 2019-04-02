@@ -2,8 +2,11 @@
 #include <vector>
 #include <iostream>
 #include <memory>
+#include <string>
 
 #include "huffmantree.h"
+
+// using directives
 
 /**
  * Huffman Tree Class Methods
@@ -20,19 +23,42 @@ bool KTMNYA001::HuffmanTree::build_tree(std::priority_queue<KTMNYA001::HuffmanNo
 
     while(my_queue.size() > 1){
         std::shared_ptr<HuffmanNode> left(new KTMNYA001::HuffmanNode(my_queue.top()));
+        std::cout << "Count" <<  left->freq << std::endl;
         my_queue.pop();
         std::shared_ptr<HuffmanNode> right(new KTMNYA001::HuffmanNode(my_queue.top()));
         my_queue.pop();
-
+        std::cout << "Count" << right->freq << std::endl;
         HuffmanNode node(left->freq + right->freq);
+        node.left = left;
+        node.right = right;
 
         my_queue.push(node);
     }
     root = std::make_shared<KTMNYA001::HuffmanNode>(KTMNYA001::HuffmanNode(my_queue.top()));
     std::cout << "Done loading priority queue" << std::endl;
+    std::cout << root->left->freq << std::endl;
     return true;
 }
 
+void KTMNYA001::HuffmanTree::build_code_table(){
+    std::string code = "";
+    build_code_table(code, root);
+}
+
+void KTMNYA001::HuffmanTree::build_code_table(std::string code, std::shared_ptr<KTMNYA001::HuffmanNode> current){
+    if(!(root->letter == '\0')){
+        std::cout << root-> letter << " " << code << std::endl;
+        code_table[root->letter] = code;
+    }
+
+    if(!(root->left == nullptr)){
+        build_code_table(code + "0", root->left);
+    }
+
+    if(!(root->right == nullptr)){
+        build_code_table(code + "1", root->right);
+    }
+}
 
 /**
  * The Huffman Node Methods
@@ -43,7 +69,9 @@ bool KTMNYA001::HuffmanTree::build_tree(std::priority_queue<KTMNYA001::HuffmanNo
  */
 KTMNYA001::HuffmanNode::HuffmanNode(char l, int f): letter(l), freq(f){}
 
-KTMNYA001::HuffmanNode::HuffmanNode(int f): freq(f){}
+KTMNYA001::HuffmanNode::HuffmanNode(int f): freq(f){
+    letter = '\0';
+}
 
 KTMNYA001::HuffmanNode::~HuffmanNode(){}
 /**

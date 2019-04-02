@@ -1,6 +1,8 @@
 #ifndef HUFFMANNODE_H
 #define HUFFMANNODE_H
 #include <memory>
+#include <string>
+#include <unordered_map>
 
 namespace KTMNYA001{
 
@@ -38,6 +40,7 @@ namespace KTMNYA001{
         
         public:
         std::shared_ptr<HuffmanNode> root;
+        std::unordered_map<char, std::string> code_table;
 
         // Constructor
         HuffmanTree();
@@ -47,6 +50,8 @@ namespace KTMNYA001{
         bool build_tree(std::priority_queue<HuffmanNode, std::vector<HuffmanNode>, Compare> queue);
 
         void build_code_table();
+
+        void build_code_table(std::string code, std::shared_ptr<HuffmanNode> current);
 
     };
 

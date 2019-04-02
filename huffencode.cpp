@@ -51,12 +51,13 @@ int main(int argc, char ** argv){
     priority_queue<HuffmanNode, vector<HuffmanNode>, Compare> my_queue = make_priority_queue(map);
 
     HuffmanTree tree;
+
+    // Build the Huffman tree.
     tree.build_tree(my_queue);
 
-    while(my_queue.size() > 0){
-        cout << my_queue.top().freq << endl;
-        my_queue.pop();
-    }
+    // Build the code table
+    tree.build_code_table();
+
     return 0;
 }
 
