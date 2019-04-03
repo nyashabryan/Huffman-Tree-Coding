@@ -31,6 +31,7 @@ namespace KTMNYA001{
 
         void write_hdr(std::string header_file);
 
+        void output_bitstream(std::string input_file, std::string output_file);
     };
 
 }

@@ -33,6 +33,9 @@ clean:
 	rm *.o
 	rm huffencode
 	rm incl.defs
+	touch inputfile
+	touch outputfile
+	rm outputfile*
 
 remove_tar:
 	rm *.tar.gz

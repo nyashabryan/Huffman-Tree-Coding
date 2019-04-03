@@ -21,6 +21,9 @@ KTMNYA001::HuffmanTree::~HuffmanTree(){
     root = nullptr;
 }
 
+/**
+ * Builds the HuffmanTree from the priority queue.
+ */
 bool KTMNYA001::HuffmanTree::build_tree(std::priority_queue<KTMNYA001::HuffmanNode, std::vector<KTMNYA001::HuffmanNode>, KTMNYA001::Compare> my_queue){
     cout << "Beginning to build tree " << "queue size: " << my_queue.size() <<endl;
     while(my_queue.size() > 1){
@@ -42,11 +45,17 @@ bool KTMNYA001::HuffmanTree::build_tree(std::priority_queue<KTMNYA001::HuffmanNo
     return true;
 }
 
+/**
+ * Initiates the code table building
+ */
 void KTMNYA001::HuffmanTree::build_code_table(){
     std::string code = "";
     build_code_table(code, root);
 }
 
+/**
+ * Recursively builds the code table by traversing down the HuffmanTree
+ */
 void KTMNYA001::HuffmanTree::build_code_table(std::string code, std::shared_ptr<KTMNYA001::HuffmanNode> current){
     if(!(current->letter == '\0')){
         code_table[current->letter] = code;
@@ -89,7 +98,7 @@ void KTMNYA001::HuffmanTree::write_output(string input_file, string output_file)
     cout << "Done" << endl;
     ofstream ofs;
     ofs.open(output_file);
-    ofs << output;
+    ofs << output.c_str();
     ofs.close();
 }
 
@@ -100,8 +109,12 @@ void KTMNYA001::HuffmanTree::write_output(string input_file, string output_file)
 void KTMNYA001::HuffmanTree::write_hdr(string header_file){
     ofstream ofs;
     ofs.open(header_file);
-
+    ofs << code_table.size() << endl;
     for(const auto &n: code_table){
         ofs << n.first << ": " << n.second << endl;
     }
+}
+
+void KTMNYA001::HuffmanTree::output_bitstream(string inputfile, string outputfile){
+    
 }
