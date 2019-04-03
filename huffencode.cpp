@@ -48,16 +48,17 @@ int main(int argc, char ** argv){
         cout << n.first << " " << n.second << endl;
     }
 
+    cout << "Map size " << map.size() << endl;
+
     priority_queue<HuffmanNode, vector<HuffmanNode>, Compare> my_queue = make_priority_queue(map);
 
-    // Test my queue
+    //Test my queue
     // cout << "Testing priority queue" << endl;
     // while(my_queue.size() > 1){
     //     cout << my_queue.top().freq << endl;
     //     my_queue.pop();
     // }
-    // cout << "Done testing priority queue" << endl << endl;
-
+    cout << "Done testing priority queue" << endl << endl;
     HuffmanTree tree;
 
     // Build the Huffman tree.
@@ -66,8 +67,14 @@ int main(int argc, char ** argv){
     // Build the code table
     tree.build_code_table();
 
+    for(const auto& n: tree.code_table){
+        cout << n.first << " " << n.second << endl;
+    }
+
     // Output the results of the encoding
     tree.output(string(argv[1]), string(argv[2]));
+
+    tree.output_bitstream(string(argv[1]), string(argv[2]));
     return 0;
 }
 
@@ -80,12 +87,13 @@ unordered_map<char, int> get_letter_frequency(string inputfile){
 
     // Open the filestream.
     ifstream ifs;
-    ifs.open(inputfile);
+    ifs.open(inputfile, ifstream::in);
 
     // Take in character after character.
     char buffer[1];
     bool exists;
     while(!ifs.eof()){
+        if(!ifs.good()) break;
         exists = false;
         ifs.read(buffer, sizeof(buffer[0]));
         
@@ -100,6 +108,8 @@ unordered_map<char, int> get_letter_frequency(string inputfile){
             map[char(buffer[0])] = 1;
         }
     }
+
+    map[buffer[0]] -= 1;
 
     ifs.close();
 

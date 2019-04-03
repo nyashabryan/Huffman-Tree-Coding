@@ -4,6 +4,7 @@
 #include <fstream>
 #include <memory>
 #include <string>
+#include <bitset>
 
 #include "huffmantree.h"
 #include "huffmannode.h"
@@ -38,10 +39,16 @@ bool KTMNYA001::HuffmanTree::build_tree(std::priority_queue<KTMNYA001::HuffmanNo
         node->left = left;
         node->right = right;
 
+        
         my_queue.push(*node);
+
+        if(my_queue.size() == 1){
+            root = node;
+        }
+        
     }
-    shared_ptr<HuffmanNode> last(new HuffmanNode(my_queue.top()));
-    root = last;
+    // shared_ptr<HuffmanNode> last(new HuffmanNode(my_queue.top()));
+    // root = last;
     return true;
 }
 
@@ -115,6 +122,54 @@ void KTMNYA001::HuffmanTree::write_hdr(string header_file){
     }
 }
 
+/**
+ * Outputs the encoded input to a bitstream
+ */
 void KTMNYA001::HuffmanTree::output_bitstream(string inputfile, string outputfile){
-    
+    cout << "Writing output" << endl;
+    string output = "";
+    char buffer[1];
+    ifstream ifs;
+    cout << inputfile << endl;
+    ifs.open(inputfile);
+    while(!ifs.eof()){
+        ifs.read(buffer, sizeof(buffer[0]));
+        output+=code_table[buffer[0]];
+    }
+    ifs.close();
+
+
+    int numberOfBytes;
+    int numberOfBits = output.size();
+
+    numberOfBytes = numberOfBits/8 + (numberOfBits%8 ? 1: 0);
+    if(numberOfBytes == 0) return;
+
+    char bitstream[numberOfBytes];
+
+    // Intialize the bitstream to 0s
+    for(int i = 0; i < numberOfBytes; i++){
+        bitstream[i] = 0;
+    }
+
+    // Iterate through the bits in the output
+    int count = 0;
+    int byte = 0;
+    int value = 0;
+    for(int i = 0; i < numberOfBits; i++){
+        if (i % 8 == 0 && i != 0){
+            byte++;
+        }
+        if (output[i] == '1'){
+            bitstream[byte] |= 1 << count;
+        }
+        count = (count + 1) % 8;
+
+    }
+
+    // print the bitstream
+    for (int i =0; i < numberOfBytes; i++){
+        bitset<8> a(bitstream[i]);
+        cout << a << endl;
+    }
 }
